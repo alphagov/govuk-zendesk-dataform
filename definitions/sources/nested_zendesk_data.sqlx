@@ -1,5 +1,8 @@
 config {
-  type: "view",
+    type: "declaration"
+    database: "govuk-knowledge-graph",
+    schema: "zendesk",
+    name: "tickets",
 }
 
 -- pre_operations {
@@ -9,12 +12,12 @@ config {
 --     FROM ${ref("ga4_process_partition")}
 --     );
 -- }
-SELECT 
-id,
-created_at,
-updated_at,
-ticket
-FROM
- `govuk-knowledge-graph.zendesk.tickets`
+-- SELECT 
+-- id,
+-- created_at,
+-- updated_at,
+-- ticket
+-- FROM
+--  `govuk-knowledge-graph.zendesk.tickets`
 
 -- WHERE TIMESTAMP_TRUNC(updated_at, DAY) > TIMESTAMP("2025-11-10")
