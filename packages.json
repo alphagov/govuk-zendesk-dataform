@@ -1,7 +1,0 @@
-{
-  "name": "dataform-project",
-  "version": "1.0.0",
-  "dependencies": {
-    "@dataform/core": "2.9.0"
-  }
-}

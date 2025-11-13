@@ -1,0 +1,23 @@
+config {
+    type: "table",
+    assertions : {
+      uniqueKey: ["group_id", "group_name"],
+      nonNull: ["group_id", "group_name"],
+    },
+    columns: {
+        group_id: "The numerical id of a group/tream.",
+        group_name: "The group name relating to a specific ID."
+      },
+    description: "A centralised lookup table to map group_id to group name"
+}
+
+SELECT
+  *
+FROM
+  UNNEST( ARRAY<STRUCT<group_id STRING, group_name STRING>>[
+    -- Ids and names for Publishing, Green and QuanQag teams
+    ('20369327',
+      '2nd Line--GOV.UK Alerts and Issues'), ('23410892',
+      '2nd Line--GOV.UK Content Training and Accounts'), ('5442314196764',
+      '3rd Line--GOV.UK Product Requests - Publishing Service'), ('20132266',
+      '3rd Line--GOV.UK Product Requests - Web') ] )
