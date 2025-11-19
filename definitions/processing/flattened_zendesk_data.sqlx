@@ -1,36 +1,47 @@
 config {
-    type: "incremental"
+    type: "incremental",
+    assertions : {
+      uniqueKey: ["id"],
+      nonNull: ["id", "created_at", "updated_at","description","priority","status","requester_id","submitter_id","group_id","tags"],
+    },
+    columns: {
+        id: "The Zendesk ticket ID .",
+        created_at: "The time at which the ticket was created.",
+        updated_at: "The time at which the teicket was updated.",
+        type: "ticket type",
+        subject: "ticket subject",
+        description: " The ticket description",
+        priority: " The ticket priority",
+        status: " The ticket status",
+        assignee_id: " The ticket assignee_id",
+        requester_id: " The ticket requester_id",
+        submitter_id: " The ticket submitter_id",
+        recipient: " The ticket recipient",
+        organization_id: " The ticket organization_id",
+        group_id: " The unique identifier for a GOVUK group",
+        due_at: " The time the ticket is due to be completed"
+      },
+    description: "A centralised lookup table to map group_id to group name"
 }
 
 SELECT
   CAST(id AS STRING) AS id,
   CAST(created_at AS TIMESTAMP) AS created_at,
   CAST(updated_at AS TIMESTAMP) AS updated_at,
-  CAST(JSON_VALUE(ticket,'$.type') AS STRING) AS type,
+  CAST(JSON_VALUE(ticket,'$.type') AS STRING) AS type, --nullable
   CAST(JSON_VALUE(ticket,'$.subject') AS STRING) AS subject,
   CAST(JSON_VALUE(ticket,'$.description') AS STRING) AS description,
   CAST(JSON_VALUE(ticket,'$.priority') AS STRING) AS priority,
   CAST(JSON_VALUE(ticket,'$.status') AS STRING) AS status,
-  CAST(JSON_VALUE(ticket,'$.assignee_id') AS STRING) AS assignee_id,
+  CAST(JSON_VALUE(ticket,'$.assignee_id') AS STRING) AS assignee_id, --nullable
   CAST(JSON_VALUE(ticket,'$.requester_id') AS STRING) AS requester_id,
   CAST(JSON_VALUE(ticket,'$.submitter_id') AS STRING) AS submitter_id,
-  CAST(JSON_VALUE(ticket,'$.recipient') AS STRING) AS recipient,
-  CAST(JSON_VALUE(ticket,'$.organization_id') AS STRING) AS organization_id,
+  CAST(JSON_VALUE(ticket,'$.recipient') AS STRING) AS recipient, --nullable
+  CAST(JSON_VALUE(ticket,'$.organization_id') AS STRING) AS organization_id, --nullable
   CAST(JSON_VALUE(ticket,'$.group_id') AS STRING) AS group_id,
-  CAST(JSON_VALUE(ticket,'$.due_at') AS STRING) AS due_at,
+  CAST(JSON_VALUE(ticket,'$.due_at') AS STRING) AS due_at, --nullable
   ticket.tags
 FROM
   ${ref("tickets")}
 WHERE
-  updated_at > updated_at_timestamp_checkpoint
-
-pre_operations {
-  DECLARE
-    updated_at_timestamp_checkpoint DEFAULT (
-    ${
-        when(incremental(),
-            `SELECT max(updated_at) FROM ${self()}`,
-            `SELECT TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 365 DAY)`)
-    }
-    )
-}
+  updated_at > ${when(incremental(), `(SELECT max(updated_at) FROM ${self()})`, `TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 365 DAY)`)}

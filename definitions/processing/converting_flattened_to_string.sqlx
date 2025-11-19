@@ -1,0 +1,33 @@
+config {
+    type: 'view',
+    assertions : {
+      uniqueKey: ["id"],
+      nonNull: ["id", "created_at", "updated_at"],
+    },
+    columns: {
+        id: "The Zendesk ticket ID .",
+        created_at: "The time at which the table was created."
+      },
+
+}
+
+SELECT
+  CAST(flattened_zendesk_data.id AS STRING) as id,
+  CAST(flattened_zendesk_data.created_at AS STRING) as created_at,
+  CAST(flattened_zendesk_data.updated_at AS STRING) as updated_at,
+  CAST(flattened_zendesk_data.type AS STRING) as type,
+  CAST(flattened_zendesk_data.subject AS STRING) as subject,
+  CAST(flattened_zendesk_data.description AS STRING) as description,
+  CAST(flattened_zendesk_data.priority AS STRING) as priority,
+  CAST(flattened_zendesk_data.status AS STRING) as status,
+  CAST(flattened_zendesk_data.assignee_id AS STRING) as assignee_id,
+  CAST(flattened_zendesk_data.requester_id AS STRING) as requester_id,
+  CAST(flattened_zendesk_data.submitter_id AS STRING) as submitter_id,
+  CAST(flattened_zendesk_data.recipient AS STRING) as recipient,
+  CAST(flattened_zendesk_data.organization_id AS STRING) as organization_id,
+  CAST(flattened_zendesk_data.group_id AS STRING) as group_id,
+  CAST(flattened_zendesk_data.due_at AS STRING) as due_at,
+  JSON_VALUE_ARRAY(flattened_zendesk_data.tags) as tags
+
+FROM
+  ${ref("flattened_zendesk_data")} flattened_zendesk_data

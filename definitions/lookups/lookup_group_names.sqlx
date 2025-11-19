@@ -1,12 +1,13 @@
 config {
     type: "table",
     assertions : {
-      uniqueKey: ["group_id", "group_name"],
-      nonNull: ["group_id", "group_name"],
-    },
+      uniqueKeys: [["group_id", "group_name","team_name"]],
+      nonNull: ["group_id", "group_name","team_name"]
+    }, 
     columns: {
         group_id: "The numerical id of a group/tream.",
-        group_name: "The group name relating to a specific ID."
+        group_name: "The group name relating to a specific ID.",
+        team_name: "The team name for a specific ID"
       },
     description: "A centralised lookup table to map group_id to group name"
 }
@@ -14,10 +15,16 @@ config {
 SELECT
   *
 FROM
-  UNNEST( ARRAY<STRUCT<group_id STRING, group_name STRING>>[
-    -- Ids and names for Publishing, Green and QuanQag teams
-    ('20369327',
-      '2nd Line--GOV.UK Alerts and Issues'), ('23410892',
-      '2nd Line--GOV.UK Content Training and Accounts'), ('5442314196764',
-      '3rd Line--GOV.UK Product Requests - Publishing Service'), ('20132266',
-      '3rd Line--GOV.UK Product Requests - Web') ] )
+  UNNEST( ARRAY<STRUCT<group_id STRING, group_name STRING, team_name STRING>>[
+    -- Ids and names for Publishing, Green and QuanQag teams "publishing"
+    -- Publishing grouping
+    ("20369327",        "2nd Line--GOV.UK Alerts and Issues",                       "Publishing"), 
+    ("23410892",        "2nd Line--GOV.UK Content Training and Accounts",           "Publishing"), 
+    ("5442314196764",   "3rd Line--GOV.UK Product Requests - Publishing Service",   "Publishing"), 
+    ("20132266",        "3rd Line--GOV.UK Product Requests - Web",                  "Publishing"), 
+    -- QuanQuaD groupings
+    ("20132293",        "3rd Line--GOV.UK Content",                         "QuanQuaD"),
+    ("23410892",        "2nd Line--GOV.UK Content Training and Accounts",   "QuanQuaD"),
+    ("20147692",        "2nd Line--GOV.UK Content Triage, Public",          "QuanQuaD"),
+    ("20304257",        "2nd Line--GOV.UK Content Triage, Gov't",           "QuanQuaD")
+] )
