@@ -25,7 +25,7 @@ SELECT
   lookup_names.group_name AS group_id,
   lookup_names.team_name
 FROM
-  ${ref("converting_flattened_to_string")} as flattened_string
+  ${ref("converting_data_types")} as flattened_string
   LEFT JOIN ${ref("lookup_group_names")} as lookup_names
   using(group_id)
   WHERE team_name = "Publishing"
