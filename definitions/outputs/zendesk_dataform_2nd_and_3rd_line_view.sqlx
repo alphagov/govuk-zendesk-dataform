@@ -26,7 +26,7 @@ SELECT
   lookup_names.team_name,
 CASE
     WHEN 'business_energy_immigration' in UNNEST(flattened_string.tags) THEN 'Yellow team'
-    WHEN "working_justice_government" in UNNEST(flattened_string.tags) THEN 'Blue team'
+    WHEN 'working_justice_government' in UNNEST(flattened_string.tags) THEN 'Blue team'
     WHEN 'tax_education' in UNNEST(flattened_string.tags) THEN 'Green team'
     WHEN 'transport_housing_health_environment' in UNNEST(flattened_string.tags) THEN 'Red team'
     ELSE 'No team'
