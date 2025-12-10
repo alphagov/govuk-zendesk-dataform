@@ -3,7 +3,7 @@ config {
     database: "govuk-conquag-data",
     schema: "zendesk_pipeline_output",
     assertions: {},
-    description: "test output before moving to govuk-publishing"
+    description: "test output before moving to ConQuaG"
 }
 
 SELECT
@@ -23,10 +23,20 @@ SELECT
   flattened_string.due_at,
   flattened_string.tags,
   lookup_names.group_name AS group_id,
-  lookup_names.team_name
+  lookup_names.team_name,
+CASE
+    WHEN 'business_energy_immigration' in UNNEST(flattened_string.tags) THEN 'Yellow team'
+    WHEN 'working_justice_government' in UNNEST(flattened_string.tags) THEN 'Blue team'
+    WHEN 'tax_education' in UNNEST(flattened_string.tags) THEN 'Green team'
+    WHEN 'transport_housing_health_environment' in UNNEST(flattened_string.tags) THEN 'Red team'
+    ELSE 'No team'
+END
+  AS Rainbow_team
+
 FROM
-  ${ref("converting_flattened_to_string")} as flattened_string
+  ${ref("converting_data_types")} as flattened_string
   LEFT JOIN ${ref("lookup_group_names")} as lookup_names
   using(group_id)
-  WHERE team_name = "QuanQuaD"
+  WHERE team_name = "ConQuaG"
+  AND status IN ("open", "pending")
   

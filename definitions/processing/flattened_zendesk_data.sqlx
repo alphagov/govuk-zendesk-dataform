@@ -40,7 +40,7 @@ SELECT
   CAST(JSON_VALUE(ticket,'$.organization_id') AS STRING) AS organization_id, --nullable
   CAST(JSON_VALUE(ticket,'$.group_id') AS STRING) AS group_id,
   CAST(JSON_VALUE(ticket,'$.due_at') AS STRING) AS due_at, --nullable
-  ticket.tags
+  ticket.tags --json array
 FROM
   ${ref("tickets")}
 WHERE

@@ -6,15 +6,28 @@ config {
     },
     columns: {
         id: "The Zendesk ticket ID .",
-        created_at: "The time at which the table was created."
+        created_at: "The time at which the table was created.",
+        updated_at: "The time at which the ticket was last updated",
+        type: "The type of the ticket",
+        subject: "The subject of the ticket",
+        description: "The description of the ticket",
+        priority: "The priority of the ticket",
+        status: "The status of the ticket, open/closed/pending",
+        assignee_id: "The id of the person who assigned the ticket",
+        requester_id: "The requester id of the ticket",
+        submitter_id: "The id of who submitted the ticket",
+        recipient: "Unsure",
+        organization_id: "The numeric organization id of the ticket",
+        group_id: "The numeric group id of the ticket",
+        due_at: "The due date of the ticket"
       },
 
 }
 
 SELECT
   CAST(flattened_zendesk_data.id AS STRING) as id,
-  CAST(flattened_zendesk_data.created_at AS STRING) as created_at,
-  CAST(flattened_zendesk_data.updated_at AS STRING) as updated_at,
+  CAST(flattened_zendesk_data.created_at AS TIMESTAMP) as created_at,
+  CAST(flattened_zendesk_data.updated_at AS TIMESTAMP) as updated_at,
   CAST(flattened_zendesk_data.type AS STRING) as type,
   CAST(flattened_zendesk_data.subject AS STRING) as subject,
   CAST(flattened_zendesk_data.description AS STRING) as description,
