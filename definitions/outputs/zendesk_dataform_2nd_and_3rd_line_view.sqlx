@@ -38,5 +38,5 @@ FROM
   LEFT JOIN ${ref("lookup_group_names")} as lookup_names
   using(group_id)
   WHERE team_name = "ConQuaG"
-  AND status in UNNEST(["open","pending"])
+  AND status IN ("open", "pending")
   
