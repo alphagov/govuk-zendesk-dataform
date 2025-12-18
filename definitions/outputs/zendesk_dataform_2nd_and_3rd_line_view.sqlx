@@ -35,7 +35,7 @@ END
 
 FROM
   ${ref("converting_data_types")} as flattened_string
-  LEFT JOIN ${ref("lookup_group_names")} as lookup_names
+  LEFT JOIN ${ref("lookup_group_to_team_name")} as lookup_names
   using(group_id)
   WHERE team_name = "ConQuaG"
   AND status IN ("open", "pending")
