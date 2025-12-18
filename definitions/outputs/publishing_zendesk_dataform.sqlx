@@ -22,7 +22,7 @@ SELECT
   flattened_string.tags,
   lookup_names.group_name AS group_id, -- this is a strange quirk of publishing, where they refer to their group_name as group_id, and don't want the numeric identifier for group
   lookup_names.team_name,
-  lookup_organization.organization_name
+  lookup_organization.organization_name as organization_name
 FROM
   ${ref("converting_data_types")} as flattened_string
   LEFT JOIN ${ref("lookup_organization_to_team_name")} as lookup_organization
