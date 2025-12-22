@@ -1,7 +1,5 @@
 config {
     type: "table",
-    database: "govuk-conquag-data",
-    schema: "zendesk_pipeline_output",
     assertions: {},
     description: "test output before moving to ConQuaG"
 }

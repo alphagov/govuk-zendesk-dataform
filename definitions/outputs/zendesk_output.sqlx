@@ -1,7 +1,7 @@
-config {
-    type: "table",
-    assertions: {},
-    description: "test output before moving to govuk-publishing"
+
+config { 
+    type: "view",
+    description: "a view of zendesk data for the publishing team"
 }
 
 SELECT
@@ -20,7 +20,7 @@ SELECT
   flattened_string.organization_id,
   flattened_string.due_at,
   flattened_string.tags,
-  lookup_names.group_name AS group_id, -- this is a strange quirk of publishing, where they refer to their group_name as group_id, and don't want the numeric identifier for group
+  lookup_names.group_name AS group_id, -- this is a strange quirk of publishing, where they refer to their group_name as group_id, and don\'t want the numeric identifier for group
   lookup_names.team_name,
   lookup_organization.organization_name as organization_name
 FROM
@@ -30,4 +30,3 @@ FROM
   LEFT JOIN ${ref("lookup_group_to_team_name")} as lookup_names
   ON flattened_string.group_id = lookup_names.group_id
   WHERE lookup_names.team_name = "Publishing"
-  
