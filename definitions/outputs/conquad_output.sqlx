@@ -50,7 +50,7 @@ rainbow_cte.due_at,
 rainbow_cte.tags,
 rainbow_cte.rainbow_team,
 lookup_names.group_name AS group_id,
-lookup_names.team_name,
+lookup_names.team_name
 FROM rainbow_cte as rainbow_cte
   LEFT JOIN ${ref("lookup_group_to_team_name")} as lookup_names
   on rainbow_cte.group_id = lookup_names.group_id

@@ -1,6 +1,5 @@
 
-// const currentEnv = dataform.projectConfig.vars.env;
-const currentEnv = "production";
+const currentEnv = dataform.projectConfig.vars.env;
 
 module.exports = {
 currentEnv: currentEnv

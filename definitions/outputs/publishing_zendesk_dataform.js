@@ -1,7 +1,6 @@
 const {currentEnv} = require('includes/constants')
 console.log(`Compiling publishing_zendesk.js. Current Environment: ${currentEnv}`);
 
-
 if (currentEnv === "production") {
 
   publish("publishing_zendesk_dataform", {
@@ -10,7 +9,7 @@ if (currentEnv === "production") {
     database: "govuk-publishing",
     schema: "zendesk_api",
     tags: ["production_only"],
-    dependencies: ['zendesk_output']
+    dependencies: ['publishing_output']
   })
   .query(ctx => `
 SELECT 
@@ -32,6 +31,6 @@ tags,
 group_id,
 team_name,
 organization_name
-  FROM ${ctx.ref("zendesk_output")}
+  FROM ${ctx.ref("publishing_output")}
   `);
 }
