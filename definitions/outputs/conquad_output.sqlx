@@ -31,7 +31,8 @@ END
   AS rainbow_team
 FROM
   ${ref("converting_data_types")} as flattened_string
-  WHERE status IN ("open", "pending"))
+  -- WHERE status IN ("open", "pending"))
+  WHERE status IN ( "open", "pending","new","solved", "hold", "closed") )
 SELECT 
 rainbow_cte.id,
 rainbow_cte.created_at,
