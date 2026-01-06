@@ -1,7 +1,7 @@
 config {
     type: "table",
     assertions : {
-      uniqueKeys: [["group_id", "group_name","team_name"]],
+      uniqueKeys: [["group_id","team_name"]],
       nonNull: ["group_id", "group_name","team_name"]
     }, 
     columns: {
@@ -23,14 +23,15 @@ FROM
     ("5442314196764",   "3rd Line--GOV.UK Product Requests - Publishing Service",   "Publishing"), 
     ("20132266",        "3rd Line--GOV.UK Product Requests - Web",                  "Publishing"), 
 
-    -- ConQuaG groupings
+
+    -- ConQuag groupings
     ("20132293",        "3rd Line--GOV.UK Content",                         "ConQuaG"),
     ("23410892",        "2nd Line--GOV.UK Content Training and Accounts",   "ConQuaG"),
     ("20147692",        "2nd Line--GOV.UK Content Triage, Public",          "ConQuaG"),
     ("20304257",        "2nd Line--GOV.UK Content Triage, Gov't",           "ConQuaG")
 ] )
 /**
-Full list of names 
+Full list of group IDs 
    ("21588337",    	    "3rd Line--PII Approvers",                                        "ConQuaG"),
     ("20331233",    	    "0th Line--Report a Problem [don't transfer here]",               "ConQuaG"),
     ("5455184128796",   	"1st Line--GOV.UK Forms",                                         "ConQuaG"),
@@ -81,4 +82,5 @@ Full list of names
     ("20395446",    	    "UTILITY--Filtering [don't transfer here]",                       "ConQuaG"),
     ("20397566",    	    "UTILITY--Bin (non-actionable feedback and tests)",               "ConQuaG"),
     ("5190837713692",   	"2nd Line--DI Technical Triage",                                  "ConQuaG"),
+
 **/

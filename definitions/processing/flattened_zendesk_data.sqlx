@@ -1,5 +1,5 @@
 config {
-    type: "incremental",
+    type: "view",
     assertions : {
       uniqueKey: ["id"],
       nonNull: ["id", "created_at", "updated_at","description","priority","status","requester_id","submitter_id","group_id","tags"],
@@ -44,4 +44,4 @@ SELECT
 FROM
   ${ref("tickets")}
 WHERE
-  updated_at > ${when(incremental(), `(SELECT max(updated_at) FROM ${self()})`, `TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 365 DAY)`)}
+  updated_at > ${`TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 365 DAY)`}
