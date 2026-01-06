@@ -1,11 +1,10 @@
 const {currentEnv} = require('includes/constants')
-console.log(`Compiling publishing_zendesk.js. Current Environment: ${currentEnv}`);
 
 if (currentEnv === "production") {
 
   publish("publishing_zendesk_dataform", {
     type: "table",
-    description: "This view is only created in production",
+    description: "This table is only created in production",
     database: "govuk-publishing",
     schema: "zendesk_api",
     tags: ["production_only"],

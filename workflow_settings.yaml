@@ -4,5 +4,5 @@ defaultDataset: zendesk_processing
 defaultAssertionDataset: dataform_assertions
 dataformCoreVersion: 3.0.35
 "vars": {
-    "env": "development" 
+    "env": "development"
   }
