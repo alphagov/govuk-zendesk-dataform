@@ -1,5 +1,5 @@
 config {
-    type: 'view',
+    type: "view",
     assertions : {
       uniqueKey: ["id"],
       nonNull: ["id", "created_at", "updated_at"],
@@ -40,7 +40,7 @@ SELECT
   CAST(flattened_zendesk_data.organization_id AS STRING) as organization_id,
   CAST(flattened_zendesk_data.group_id AS STRING) as group_id,
   CAST(flattened_zendesk_data.due_at AS STRING) as due_at,
-  JSON_VALUE_ARRAY(flattened_zendesk_data.tags) as tags
+  JSON_VALUE_ARRAY(flattened_zendesk_data.tags) as tags /** Outputs as array, which is used in feature column "Rainbow team" in ./definitions/outputs/conquad_output.sqlx **/
 
 FROM
   ${ref("flattened_zendesk_data")} flattened_zendesk_data
