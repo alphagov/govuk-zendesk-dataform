@@ -48,7 +48,7 @@ rainbow_cte.submitter_id,
 rainbow_cte.recipient,
 rainbow_cte.organization_id,
 rainbow_cte.due_at,
-rainbow_cte.tags,
+ARRAY_TO_STRING(rainbow_cte.tags,',') as tags,
 rainbow_cte.rainbow_team,
 lookup_names.group_name AS group_id,
 lookup_names.team_name

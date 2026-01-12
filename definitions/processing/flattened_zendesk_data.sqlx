@@ -7,7 +7,7 @@ config {
     columns: {
         id: "The Zendesk ticket ID .",
         created_at: "The time at which the ticket was created.",
-        updated_at: "The time at which the teicket was updated.",
+        updated_at: "The time at which the ticket was updated.",
         type: "ticket type",
         subject: "ticket subject",
         description: " The ticket description",

@@ -1,5 +1,4 @@
-const {currentEnv} = require('includes/constants')
-console.log(`Compiling publishing_zendesk.js. Current Environment: ${currentEnv}`);
+const {currentEnv} = require('includes/constants');
 
 if (currentEnv === "production") {
 
