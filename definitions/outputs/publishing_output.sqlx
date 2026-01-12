@@ -19,7 +19,7 @@ SELECT
   flattened_string.recipient,
   flattened_string.organization_id,
   flattened_string.due_at,
-  ARRAY_TO_STRING(flattened_string.tags,',') as tags,
+  CAST(ARRAY_TO_STRING(flattened_string.tags,',') AS STRING) as tags,
   lookup_names.group_name AS group_id, -- this is a strange quirk of publishing, where they refer to their group_name as group_id, and don\'t want the numeric identifier for group
   lookup_names.team_name,
   lookup_organization.organization_name as organization_name
