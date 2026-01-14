@@ -9,7 +9,7 @@ config {
         group_name: "The group name relating to a specific ID.",
         team_name: "The team name for a specific ID"
       },
-    description: "A centralised lookup table to map group_id to group name"
+    description: "A centralised lookup table to map group_id to group name "
 }
 
 SELECT
