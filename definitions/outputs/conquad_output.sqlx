@@ -3,51 +3,28 @@ config {
     assertions: {},
     description: "test output before moving to ConQuaG"
 }
-WITH rainbow_cte AS (
-SELECT
-  flattened_string.id,
-  flattened_string.created_at,
-  flattened_string.updated_at,
-  flattened_string.type,
-  flattened_string.subject,
-  flattened_string.description,
-  flattened_string.priority,
-  flattened_string.status,
-  flattened_string.assignee_id,
-  flattened_string.requester_id,
-  flattened_string.submitter_id,
-  flattened_string.recipient,
-  flattened_string.organization_id,
-  flattened_string.due_at,
-  flattened_string.tags,
-  flattened_string.group_id,
-  rainbow_team.rainbow_team
-FROM
-  ${ref("converting_data_types")} as flattened_string
-LEFT JOIN ${ref("rainbow_teams_lookup")} as rainbow_team 
-on rainbow_team.tags IN UNNEST(flattened_string.tags)
-  WHERE status IN ( "open", "pending","new","solved", "hold", "closed") )
+
 SELECT 
-rainbow_cte.id,
-rainbow_cte.created_at,
-rainbow_cte.updated_at,
-rainbow_cte.type,
-rainbow_cte.subject,
-rainbow_cte.description,
-rainbow_cte.priority,
-rainbow_cte.status,
-rainbow_cte.assignee_id,
-rainbow_cte.requester_id,
-rainbow_cte.submitter_id,
-rainbow_cte.recipient,
-rainbow_cte.organization_id,
-rainbow_cte.due_at,
-CAST(ARRAY_TO_STRING(rainbow_cte.tags,',') AS STRING) as tags,
-rainbow_cte.rainbow_team,
+rainbow.id,
+rainbow.created_at,
+rainbow.updated_at,
+rainbow.type,
+rainbow.subject,
+rainbow.description,
+rainbow.priority,
+rainbow.status,
+rainbow.assignee_id,
+rainbow.requester_id,
+rainbow.submitter_id,
+rainbow.recipient,
+rainbow.organization_id,
+rainbow.due_at,
+ARRAY_TO_STRING(rainbow.tags,',')  as tags,
+rainbow.rainbow_team as Rainbow_team,
 lookup_names.group_name AS group_id,
 lookup_names.team_name
-FROM rainbow_cte as rainbow_cte
+FROM ${ref("conquad_rainbow_team")} as rainbow
   LEFT JOIN ${ref("lookup_group_to_team_name")} as lookup_names
-  on rainbow_cte.group_id = lookup_names.group_id
-  WHERE team_name = "ConQuaG" AND rainbow_team IS NOT NULL
+  on rainbow.group_id = lookup_names.group_id
+  WHERE team_name = "ConQuaG"
   

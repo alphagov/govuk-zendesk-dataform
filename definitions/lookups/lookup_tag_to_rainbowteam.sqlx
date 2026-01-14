@@ -15,8 +15,8 @@ SELECT
 FROM
   UNNEST( ARRAY<STRUCT<tags STRING, rainbow_team STRING>>[
     -- tags and their corresponding team name for publishing"
-    ("business_energy_immigration", "Yellow team"),
-    ("working_justice_government", "Blue team"),
-    ("tax_education", "Green team"),
-    ("transport_housing_health_environment", "Red team")
+    ('business_energy_immigration',           "Yellow team"),
+    ('working_justice_government',            "Blue team"),
+    ('tax_education',                         "Green team"),
+    ('transport_housing_health_environment',  "Red team")
 ] )

@@ -1,0 +1,48 @@
+config {
+    type: "table",
+    assertions: {},
+    description: "To add rainbow team field and drop tickets with no rainbow team"
+}
+WITH rainbow_cte AS (
+SELECT
+  converted_data.id,
+  converted_data.created_at,
+  converted_data.updated_at,
+  converted_data.type,
+  converted_data.subject,
+  converted_data.description,
+  converted_data.priority,
+  converted_data.status,
+  converted_data.assignee_id,
+  converted_data.requester_id,
+  converted_data.submitter_id,
+  converted_data.recipient,
+  converted_data.organization_id,
+  converted_data.due_at,
+  converted_data.tags,
+  converted_data.group_id,
+  rainbow_team.rainbow_team,
+FROM
+  ${ref("converting_data_types")} as converted_data
+INNER JOIN ${ref("lookup_tag_to_rainbowteam")} as rainbow_team 
+on rainbow_team.tags IN UNNEST(converted_data.tags)
+  WHERE status IN ( "open", "pending","new","solved", "hold", "closed") )
+SELECT 
+  id,
+  created_at,
+  updated_at,
+  type,
+  subject,
+  description,
+  priority,
+  status,
+  assignee_id,
+  requester_id,
+  submitter_id,
+  recipient,
+  organization_id,
+  due_at,
+  tags,
+  group_id,
+  rainbow_team
+FROM rainbow_cte

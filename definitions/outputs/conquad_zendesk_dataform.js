@@ -27,7 +27,7 @@ recipient,
 organization_id,
 due_at,
 tags,
-rainbow_team,
+Rainbow_team,
 group_id,
 team_name
   FROM ${ctx.ref("conquad_output")}
