@@ -1,0 +1,22 @@
+config {
+    type: "table",
+    assertions : {
+      uniqueKeys: [["tags","rainbow_team"]],
+      nonNull: ["tags", "rainbow_team"]
+    }, 
+    columns: {
+        tags: "A tag associated with a ticket.",
+        rainbow_team: "The Publishing team name."
+      },
+    description: "A centralised lookup table to map tag to rainbow team name"
+}
+SELECT
+  *
+FROM
+  UNNEST( ARRAY<STRUCT<tags STRING, rainbow_team STRING>>[
+    -- tags and their corresponding team name for publishing"
+    ("business_energy_immigration", "Yellow team"),
+    ("working_justice_government", "Blue team"),
+    ("tax_education", "Green team"),
+    ("transport_housing_health_environment", "Red team")
+] )

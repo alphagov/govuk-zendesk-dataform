@@ -21,17 +21,11 @@ SELECT
   flattened_string.due_at,
   flattened_string.tags,
   flattened_string.group_id,
-CASE
-    WHEN 'business_energy_immigration' in UNNEST(flattened_string.tags) THEN 'Yellow team'
-    WHEN 'working_justice_government' in UNNEST(flattened_string.tags) THEN 'Blue team'
-    WHEN 'tax_education' in UNNEST(flattened_string.tags) THEN 'Green team'
-    WHEN 'transport_housing_health_environment' in UNNEST(flattened_string.tags) THEN 'Red team'
-    ELSE NULL
-END
-  AS rainbow_team
+  rainbow_team.rainbow_team
 FROM
   ${ref("converting_data_types")} as flattened_string
-  -- WHERE status IN ("open", "pending"))
+LEFT JOIN ${ref("rainbow_teams_lookup")} as rainbow_team 
+on rainbow_team.tags IN UNNEST(flattened_string.tags)
   WHERE status IN ( "open", "pending","new","solved", "hold", "closed") )
 SELECT 
 rainbow_cte.id,

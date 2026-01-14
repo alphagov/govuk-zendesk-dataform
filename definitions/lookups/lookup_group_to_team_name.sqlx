@@ -21,15 +21,9 @@ FROM
     ("20369327",        "2nd Line--GOV.UK Alerts and Issues",                       "Publishing"), 
     ("23410892",        "2nd Line--GOV.UK Content Training and Accounts",           "Publishing"), 
     ("5442314196764",   "3rd Line--GOV.UK Product Requests - Publishing Service",   "Publishing"), 
-    ("20132266",        "3rd Line--GOV.UK Product Requests - Web",                  "Publishing"), 
+    ("20132266",        "3rd Line--GOV.UK Product Requests - Web",                  "Publishing")
+  ])
 
-
-    -- ConQuag groupings
-    ("20132293",        "3rd Line--GOV.UK Content",                         "ConQuaG"),
-    ("23410892",        "2nd Line--GOV.UK Content Training and Accounts",   "ConQuaG"),
-    ("20147692",        "2nd Line--GOV.UK Content Triage, Public",          "ConQuaG"),
-    ("20304257",        "2nd Line--GOV.UK Content Triage, Gov't",           "ConQuaG")
-] )
 /**
 Full list of group IDs 
    ("21588337",    	    "3rd Line--PII Approvers",                                        "ConQuaG"),
