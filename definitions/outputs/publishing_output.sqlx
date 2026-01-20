@@ -1,7 +1,11 @@
 
 config { 
     type: "view",
-    description: "a view of zendesk data for the publishing team"
+    description: "a view of zendesk data for the publishing team",
+    assertions: {
+      uniqueKey: ["id"],
+      nonNull: ["id", "created_at", "updated_at"],
+}
 }
 
 SELECT

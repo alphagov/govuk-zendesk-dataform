@@ -1,6 +1,9 @@
 config {
     type: "table",
-    assertions: {},
+    assertions: {
+      uniqueKey: ["id"],
+      nonNull: ["id", "created_at", "updated_at"],
+    },
     description: "test output before moving to ConQuaG"
 }
 
