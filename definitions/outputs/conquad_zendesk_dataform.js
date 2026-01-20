@@ -5,8 +5,8 @@ if (currentEnv === "production") {
   publish("zendesk_dataform_2nd_and_3rd_line_view", {
     type: "table",
     description: "This table is only created in production",
-    database: "gds-bq-reporting",
-    schema: "zendesk_processing_publishing",
+    database: "govuk-conquag-data",
+    schema: "zendesk_dataform_pipeline_output",
     tags: ["production_only"],
     dependencies: ['conquad_output']
   })
