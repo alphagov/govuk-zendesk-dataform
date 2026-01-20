@@ -6,7 +6,7 @@ if (currentEnv === "production") {
     type: "table",
     description: "This table is only created in production",
     database: "gds-bq-reporting",
-    schema: "zendesk_processing_publishing_exploration",
+    schema: "zendesk_processing_publishing",
     tags: ["production_only"],
     dependencies: ['conquad_output']
   })
@@ -27,7 +27,7 @@ recipient,
 organization_id,
 due_at,
 tags,
-rainbow_team,
+Rainbow_team,
 group_id,
 team_name
   FROM ${ctx.ref("conquad_output")}

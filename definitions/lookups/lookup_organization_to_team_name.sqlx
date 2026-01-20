@@ -1,7 +1,7 @@
 config {
     type: "table",
     assertions : {
-      uniqueKeys: [["organization_id","team_name"]],
+      uniqueKey: [["organization_id","team_name"]],
       nonNull: ["organization_id", "organization_name","team_name"]
     }, 
     columns: {
