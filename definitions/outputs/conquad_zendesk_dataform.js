@@ -28,6 +28,7 @@ organization_id,
 due_at,
 tags,
 Rainbow_team,
+organizations_name,
 group_id,
 team_name
   FROM ${ctx.ref("conquad_output")}
