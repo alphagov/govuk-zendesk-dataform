@@ -24,10 +24,13 @@ rainbow.organization_id,
 rainbow.due_at,
 ARRAY_TO_STRING(rainbow.tags,',')  as tags,
 rainbow.rainbow_team as Rainbow_team,
-lookup_names.group_name AS group_id,
-lookup_names.team_name
+lookup_organization.organization_name as organizations_name,
+lookup_group_team_names.group_name AS group_id,
+lookup_group_team_names.team_name
 FROM ${ref("conquad_rainbow_team")} as rainbow
-  LEFT JOIN ${ref("lookup_group_to_team_name")} as lookup_names
-  on rainbow.group_id = lookup_names.group_id
-  WHERE team_name = "ConQuaG"
+  LEFT JOIN ${ref("lookup_organization_to_team_name")} as lookup_organization
+  using (organization_id)
+  LEFT JOIN ${ref("lookup_group_to_team_name")} as lookup_group_team_names
+  on rainbow.group_id = lookup_group_team_names.group_id
+  WHERE lookup_group_team_names.team_name = "ConQuaG"
   
