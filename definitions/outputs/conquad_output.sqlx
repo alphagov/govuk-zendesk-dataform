@@ -1,7 +1,7 @@
 config {
     type: "table",
     assertions: {
-      uniqueKey: ["id"],
+      uniqueKey: ["id","rainbow_team"],
       nonNull: ["id", "created_at", "updated_at"],
     },
     description: "test output before moving to ConQuaG"
