@@ -122,6 +122,11 @@ To add new groups or organizations:
 ### Deployment
 Once your PR is reviewed and approved, merge into `main`. The production release configuration will compile and execute the updated workflow.
 
+### Note on Conquad Rainbow output 
+- Modified the  uniquekey to be a composite of ["id","rainbow_team"] 
+- as if a ticket has the tags for more then one rainbow team, we do want a row for each ticket. it does mean the ticket ID occurs more then once in the final output. 
+However currently this is only an issue for 3 tickets, duplicated twice. 
+
 ## Licence
 
 [MIT](LICENSE)
